@@ -1,3 +1,23 @@
 body{
-	background-color: blue;
+	background-color: white;
+}
+
+#header{
+	background-color: red;
+	
+}
+
+#header li{
+	display: inline;
+	padding-left: 50px;
+	
+}
+
+#footer{
+	position: absolute;
+	bottom: 0;
+}
+#footer li{
+	display: inline;
+	padding-left: 50px;
 }

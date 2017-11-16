@@ -2,11 +2,11 @@
 
 {% block content %}
 <div id = "header">
-	<img src="wizard.jpg" style="width:270px;height:125px;">
-	<img src="banner.jpg" style="width:700px;height:150px;paddingtop:30px" align="right">
+	{% load static %}
+	<img src="{% static 'mathswizard/wizard.png' %}" style="width:200px;height:125px;">
 	<ul>
 		<li><a href="Home.html" style="border-radius:5px 0px 0px 0px;background-color:rgb(0, 204, 255);color:white">Home</a></li>
-		<li><a href="login.php">Log in</a></li>
+		
 		<li><a href="signup.php" style="border-radius:0px 5px 5px 0px">Sign up</a></li>
 	</ul>
 </div>
