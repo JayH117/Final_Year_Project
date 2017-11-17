@@ -1,26 +1,9 @@
 {% extends "mathswizard/header.html" %}
 
 {% block content %}
-<div id = "header">
-	{% load static %}
-	<img src="{% static 'mathswizard/wizard.png' %}" style="width:200px;height:125px;">
-	<ul>
-		<li><a href="Home.html" style="border-radius:5px 0px 0px 0px;background-color:rgb(0, 204, 255);color:white">Home</a></li>
-		
-		<li><a href="signup.php" style="border-radius:0px 5px 5px 0px">Sign up</a></li>
-	</ul>
-</div>
 <div id ="content">
 	<div id = "incon">
 		<h2>Welcome to Maths Wizard! Please Log In or Create an account to get started!</h2>
 	</div>
-	<div id = "footer">
-		<ul class = "links">
-			<li><a href="Home.html">Home</a></li>
-			<li><a href="mathswizard/login.php">Log in</a></li>
-			<li><a href="signup.php">Sign up</a></li>
-		</ul>
-	</div>
-</div>
 
 {% endblock %}

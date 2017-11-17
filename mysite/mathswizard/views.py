@@ -6,7 +6,10 @@ def home(request):
 	return render(request, 'mathswizard/home.html')
 
 def login(request):
-	return render(request, 'mathswizard/login.php')
+	return render(request, 'mathswizard/login.html')
+	
+def dashboard(request):
+	return render(request, 'mathswizard/dashboard.html')
 	
 # def logout(request):
 	# return render(request, 'mathswizard/logout.php')
