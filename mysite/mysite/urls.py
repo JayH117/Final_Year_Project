@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from mysite import views
 
 urlpatterns = [
+	url(r'^$', views.login_redirect, name='login_redirect'),
     url(r'^admin/', admin.site.urls),
 	url(r'^mathswizard/', include('mathswizard.urls')),
 	url(r'^$', include('mathswizard.urls')),

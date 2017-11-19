@@ -6,19 +6,19 @@
 	<meta charset='utf-8' />
 	
 	{% load static %}
-	<link rel="stylesheet" href="{% static 'mathswizard/mathswizard.css' %}" type="text/css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
 <div id = "header">
 	<img src="{% static 'mathswizard/wizard.png' %}" style="width:200px;height:125px;">
 	<ul>
-		<li><a href="Home.html" style="border-radius:5px 0px 0px 0px;">Home</a></li>
-		<li><a href="login.php" style="border-radius:5px 5px 0px 0px;background-color:rgb(0, 204, 255);color:white">Log in</a></li>
-		<li><a href="signup.php" style="border-radius:0px 5px 5px 0px">Sign up</a></li>
+		<li><a href="/mathswizard/home" style="border-radius:5px 0px 0px 0px;">Home</a></li>
+		<li><a href="/mathswizard/login" style="border-radius:5px 5px 0px 0px;">Log in</a></li>
+		<li><a href="/mathswizard/register" style="border-radius:0px 5px 5px 0px">Sign up</a></li>
 	</ul>
 	</div>
 
-<body class='body' style='background-color=#42f4e5'>
+<body class='container'>
 	<div>
 		{% block content %}
 		{% endblock %}
@@ -27,9 +27,9 @@
 
 <div id = "footer">
 			<ul class = "links">
-				<li><a href="home">Home</a></li>
-				<li><a href="login">Log in</a></li>
-				<li><a href="register">Sign up</a></li>
+				<li><a href="/mathswizard/home">Home</a></li>
+				<li><a href="/mathswizard/login">Log in</a></li>
+				<li><a href="/mathswizard/register">Sign up</a></li>
 			</ul>
 </div>
 </html>

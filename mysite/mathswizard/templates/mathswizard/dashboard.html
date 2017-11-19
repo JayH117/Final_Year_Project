@@ -7,13 +7,10 @@
 
 	<div id = "incon">
 	
-		<h2>Welcome !</h2>
-		
-		<form method = 'post'>
-			<tr>
-				<td><input name="show" type="submit" value=" Check my class "></td>
-			</tr>
-		</form>
+		<h2>Welcome {{user.first_name}}!</h2>
+			<button href="/mathswizard/dashboard/edit_profile">Edit Profile</button>
+			<button type="submit">Check My Class</button>
+			<button type="submit">Browse Other Results</button>
 	</div>
 </div>
 </body>
