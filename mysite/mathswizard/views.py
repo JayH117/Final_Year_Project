@@ -37,8 +37,8 @@ def edit_user(request):
 		if form.is_valid():
 			form.save()
 			return redirect('/mathswizard/dashboard')
-		else:
-			form = UserChangeForm(instance=request.user)
-			args = {'form': form}
-			return render(request, 'mathswizard/edit_user.html', args) 
+	else:
+		form = UserChangeForm(instance=request.user)
+		args = {'form': form}
+		return render(request, 'mathswizard/edit_user.html', args)
 # Create your views here.

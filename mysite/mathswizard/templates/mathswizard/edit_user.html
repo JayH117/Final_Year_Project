@@ -9,7 +9,7 @@
 	
 		<h2>Change your information</h2>
 		<form method='post'>
-		{{% csrf token %}}
+		{% csrf_token %}
 		{{form.as_p}}
 		<button type="submit">Confirm changes</button>
 		</form>
