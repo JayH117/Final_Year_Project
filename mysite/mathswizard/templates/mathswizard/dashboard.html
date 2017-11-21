@@ -9,8 +9,10 @@
 	
 		<h2>Welcome {{user.first_name}}!</h2>
 			<a href="/mathswizard/dashboard/edit_user">Edit Profile</a>
-			<button type="submit">Check My Class</button>
-			<button type="submit">Browse Other Results</button>
+			<button onclick="window.location.href='/mathswizard/students'">Check My Class</button>
+			<button onclick="window.location.href='/mathswizard/add_student'">Add a Student</button>
+			<a href="/mathswizard/logout">Log Out</a>
+			<h1>{{ data }}</h1>
 	</div>
 </div>
 </body>

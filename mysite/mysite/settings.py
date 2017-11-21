@@ -121,3 +121,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = '/mathswizard/dashboard'
+
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
