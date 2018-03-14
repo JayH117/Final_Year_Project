@@ -5,7 +5,8 @@ from django.template.response import TemplateResponse
 from mathswizard.forms import ( 
 	RegistrationForm,
 	EditUserForm,
-	StudentForm
+	StudentForm,
+	StudentFocus
 	)
 from mathswizard.models import StudentProfile, TeacherProfile
 from django.contrib.auth.models import User
@@ -63,20 +64,41 @@ def change_password(request):
 	else:
 		form = PasswordChangeForm(user=request.user)
 		args = {'form': form}
-		return render(request, 'mathswizard/change_password.html', args)
-	
-def add_student(request):
-    if request.method =='POST':
-        form = StudentForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('/mathswizard/dashboard')
-    else:
-        form = StudentForm()
-        args = {'form': form}
-		
-        return render(request, 'mathswizard/add_student.html',args)
+		return render(request, 'mathswizard/change_password.html', args)	
 		
 def students(request):
 	data = StudentProfile.objects.filter(teacher = request.user)
+	data = list(data)
 	return TemplateResponse(request, 'mathswizard/mystudents.html',{"data": data})
+	
+def game(request):
+	return render(request, 'mathswizard/game.html')
+	
+def student(request):
+	return render(request, 'mathswizard/dashboardStudent.html')
+	
+def add_student(request):
+	if request.method =='POST':
+			form = StudentForm(request.POST)
+			if form.is_valid():
+				instance = form.save()
+				NewStudent = User.objects.get(username=instance.username).id
+				return redirect('/mathswizard/student_focus', NewStudent)
+			
+	else:
+		form = StudentForm()
+		args = {'form': form}
+		
+		return render(request, 'mathswizard/add_student.html',args)	
+		
+def student_focus(request):
+	if request.method =='POST':
+			form = StudentFocus(request.POST)
+			if form.is_valid():
+				form.save()
+				return redirect('/mathswizard/dashboard')
+	else:
+		form = StudentFocus()
+		args = {'form': form}
+		
+		return render(request, 'mathswizard/Student_Focus.html',args)

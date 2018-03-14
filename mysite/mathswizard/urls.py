@@ -24,5 +24,8 @@ urlpatterns = [
         password_reset_confirm, name='password_reset_confirm'),
 	url(r'^password_reset/complete/$', password_reset_complete, name='password_reset_complete'),
 	url(r'^add_student/$', views.add_student),
-	url(r'^students/$', views.students)
+	url(r'^students/$', views.students),
+	url(r'^game/$', views.game),
+	url(r'^student/$', views.student),
+	url(r'^student_focus/$', views.student_focus)
 ]

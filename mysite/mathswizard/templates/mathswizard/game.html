@@ -1,0 +1,34 @@
+<!doctype html> 
+<head> 
+	<meta charset="UTF-8"/>
+	{% load static %}
+    <title>Maths Wizard</title>
+
+    <script src ={% static "/mathswizard/phaser.min.js" %} ></script>
+
+    <script src ={% static "/mathswizard/Boot.js" %}></script>
+
+    <script src ={% static "/mathswizard/Preloader.js" %}></script>
+
+    <script src ={% static "/mathswizard/MainMenu.js" %}></script>
+
+    <script src ={% static "/mathswizard/Level1.js" %}></script>
+
+
+</head>
+<body>
+	<script>
+		window.onload = function(){
+
+			var game = new Phaser.Game(800, 600, Phaser.CANVAS,'');
+
+			game.state.add('Boot', Game.Boot);
+			game.state.add('Preloader', Game.Preloader);
+			game.state.add('MainMenu', Game.MainMenu);
+			game.state.add('Level1', Game.Level1);
+
+			game.state.start('Boot');
+		};
+	</script>
+</body>
+</html>

@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.forms import ModelForm
+from mathswizard.models import StudentProfile
 
 class RegistrationForm(UserCreationForm):
 	email = forms.EmailField(required=True)
@@ -60,3 +62,22 @@ class StudentForm(UserCreationForm):
 				
 			return user
 			
+class StudentFocus(ModelForm):
+	
+	class Meta:
+		model = StudentProfile
+		fields = (
+			'user',
+			'teacher',
+			'focus',
+			'difficulty'
+			)
+		
+		def save(self, commit=True):
+			focus = super(StudentFocus, self).save(commit=False)
+			focus.focus = self.cleaned_data['focus']
+			focus.difficulty = self.cleaned_data['difficulty']
+			
+			if commit:
+				focus.save()
+			return focus
