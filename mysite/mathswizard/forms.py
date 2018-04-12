@@ -63,14 +63,16 @@ class StudentForm(UserCreationForm):
 			return user
 			
 class StudentFocus(ModelForm):
-	
+	first_name = forms.CharField(required=False)
+	last_name = forms.CharField(required=False)
 	class Meta:
 		model = StudentProfile
 		fields = (
-			'user',
 			'teacher',
 			'focus',
-			'difficulty'
+			'difficulty',
+			'first_name',
+			'last_name',
 			)
 		
 		def save(self, commit=True):
@@ -80,4 +82,25 @@ class StudentFocus(ModelForm):
 			
 			if commit:
 				focus.save()
+			return focus
+			
+class GameUpdates(ModelForm):
+	
+	class Meta:
+		model = StudentProfile
+		fields = (
+			'likes',
+			'dislikes',
+			'level',
+			'cof',
+			'completed',
+			'skipped', 
+			'levelprog'
+			)
+		
+		def save(self, commit=True):
+			gameUp = super(GameUpdates, self).save(commit=False)
+			
+			if commit:
+				gameUp.save()
 			return focus

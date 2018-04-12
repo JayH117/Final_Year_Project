@@ -1,5 +1,16 @@
-{% extends "mathswizard/header.html" %}
+{% extends "mathswizard/LoggedInHeader.html" %}
 
 {% block content %}
-<h1>{{data}}</h1>
+	{% if my_students %}
+	<table class="table">
+		<tbody>
+		<th scope="col">{{ request.user.first_name }}'s Students</th>
+		{% for student in my_students %}
+			<tr><td><a href ="/mathswizard/dashboard/mystudents/{{ student.id }}/"> {{ student.first_name }} {{ student.last_name }}</a></td></tr>
+		{% endfor %}
+		</tbody>
+	</table>
+	{% else %}
+		<h3> You haven't added any students yet </h3>
+	{% endif %}
 {% endblock %}

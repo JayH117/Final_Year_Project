@@ -14,7 +14,7 @@ Game.Boot.prototype = {
 
 	preload:function(){
 
-		this.load.image('preloaderBar', 'assets/village.jpeg');
+		this.load.image('preloaderBar', background);
 
 	},
 

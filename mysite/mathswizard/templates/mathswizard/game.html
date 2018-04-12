@@ -3,8 +3,34 @@
 	<meta charset="UTF-8"/>
 	{% load static %}
     <title>Maths Wizard</title>
-
-    <script src ={% static "/mathswizard/phaser.min.js" %} ></script>
+	<h1></h1>
+	<script> 
+	// Declaring variables for use in the game
+			var name = "{{ user.first_name }}";
+			var background = "{% static "mathswizard/assets/menu.jpg" %}";
+			var desk = "{% static "mathswizard/assets/screen.png" %}";
+			var buttons = "{% static "mathswizard/assets/buttons/scroll.png"%}";
+			var wizardlab = "{% static "mathswizard/assets/wizardlab.jpg"%}";
+			var Sfocus = "{{ student.focus }}";
+			var difficulty = "{{ student.difficulty }}";
+			var completed = 0;
+			var likes = "{{ student.likes }}";
+			var type;
+			var dislikes = "{{ student.dislikes }}";
+			var additionCounter = 0;
+			var multiplicationCounter = 0;
+			var subtractionCounter = 0;
+			var cof = "{{ student.cof }}";
+			var level = "{{ student.level }}";
+			var completed;
+			var skipped = "{{ student.skipped }}";
+			var part1;
+			var part2;
+			var answer;
+			var levelprog = "{{student.levelprog}}";
+	</script>
+	<!-- loading javascript files -->
+    <script src ={% static "/mathswizard/phaser.min.js" %}></script>
 
     <script src ={% static "/mathswizard/Boot.js" %}></script>
 
@@ -13,22 +39,40 @@
     <script src ={% static "/mathswizard/MainMenu.js" %}></script>
 
     <script src ={% static "/mathswizard/Level1.js" %}></script>
-
+	
+	<script src ={% static "/mathswizard/preLevel.js" %}></script>
+	
+	<script src ={% static "/mathswizard/postLevel.js" %}></script>
+	
+	<script src ={% static "/mathswizard/skipHandler.js" %}></script>
+	
+	<script src ={% static "/mathswizard/howto.js" %}></script>
 
 </head>
-<body>
+<body align = center>
 	<script>
 		window.onload = function(){
-
-			var game = new Phaser.Game(800, 600, Phaser.CANVAS,'');
+		// adding game states and starting game
+			var game = new Phaser.Game(1000, 600, Phaser.CANVAS,'');
 
 			game.state.add('Boot', Game.Boot);
 			game.state.add('Preloader', Game.Preloader);
 			game.state.add('MainMenu', Game.MainMenu);
+			game.state.add('howto', Game.howto);
 			game.state.add('Level1', Game.Level1);
+			game.state.add('preLevel', Game.preLevel);
+			game.state.add('postLevel', Game.postLevel);
+			game.state.add('skipHandler', Game.skipHandler);
 
 			game.state.start('Boot');
 		};
 	</script>
+	<div id="divform" style="display: none;">
+	<!-- hidden form used for posting data back to database when game is finished -->
+		<form id="gameForm" method="post">
+			{% csrf_token %}
+			{{ form.as_p }}
+		</form>
+	</div>
 </body>
 </html>

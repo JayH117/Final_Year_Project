@@ -1,19 +1,65 @@
-{% extends "mathswizard/header.html" %}
+{% extends "mathswizard/LoggedInHeader.html" %}
 
 {% block content %}
 <body>
 
 <div id ="content">
-
 	<div id = "incon">
-	
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js'></script>
 		<h2>Welcome {{user.first_name}}!</h2>
-			<a href="/mathswizard/dashboard/edit_user">Edit Profile</a>
-			<button onclick="window.location.href='/mathswizard/students'">Check My Class</button>
-			<button onclick="window.location.href='/mathswizard/add_student'">Add a Student</button>
-			<a href="/mathswizard/logout">Log Out</a>
-			<h1>{{ data }}</h1>
+		
+		{% if countStudents > 0 %}
+		<table class="table">
+			<th>Active Students</th>
+				<tbody>
+					{% for student in activeStudents %}
+						<tr><td>{{ student.first_name }} {{ student.last_name }}</a></td></tr>
+					{% endfor %}
+				</tbody>
+		</table>
+		<div id = "stats">
+			<h3> You have {{ countStudents }} students with an average level of {{ levelAvg }} <h3>
+			<canvas id="myChart" width="250" height="250"></canvas>
+		</div>
 	</div>
-</div>
+		{{ % else % }}
+			<h3> You have not added any students yet <h3>
+		{% endif %}
+<script>
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: ["Addition", "Subtraction", "Multiplication"],
+        datasets: [{
+            data: [{{ countAddition }},{{ countSubtraction }}, {{ countMultiplication}}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+		maintainAspectRatio: false,
+		title: {
+            display: true,
+            text: 'Focus distribution'
+        }
+    }
+});
+</script>
 </body>
 {% endblock %}

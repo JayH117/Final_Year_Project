@@ -1,5 +1,4 @@
 Game.Preloader = function(game){
-
 	this.preloadBar = null;
 };
 
@@ -15,9 +14,15 @@ Game.Preloader.prototype = {
 
 		// Load assets
 
-		this.load.image('titlescreen', 'village.jpeg');
+		this.load.image('titlescreen', background);
+		
+		this.load.image('desk', desk);
 
-		this.load.image('button', 'mathswizard/assets/buttons/scroll.png');
+		this.load.image('button', buttons);
+		
+		this.load.image('gamescreen', wizardlab);
+		
+		this.load.image('dragonBubble', dragonBubble)
 	},
 
 	create:function(){

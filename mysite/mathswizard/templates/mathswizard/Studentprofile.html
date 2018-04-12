@@ -1,0 +1,59 @@
+{% extends "mathswizard/LoggedInHeader.html" %}
+
+{% block content %}
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js'></script>
+<table class="table">
+	<tbody>
+		<tr><td>First name: </td><td>{{ profile.first_name }}</td></tr>
+		<tr><td>Last name: </td><td> {{ profile.last_name }}</td></tr>
+		<tr><td>Current Focus: </td><td> {{ profile.focus }}</td></tr>
+		<tr><td>Current Difficulty: </td><td> {{ profile.difficulty }}</td></tr>
+		<tr><td>Level: </td><td> {{ profile.level }}  </td></tr>
+		<tr><td>Completed: </td><td> {{ profile.completed }}  </td></tr>
+		<tr><td>Completed of focused operations: </td><td> {{ profile.cof }}</td></tr>
+		<tr><td>Skipped: </td><td> {{ profile.skipped }}</td></tr>
+		<tr><td><button onclick="window.location.href='/mathswizard/student_focus/{{ profile.id }}'">Change Focus</button></td></tr>
+		<tr><td><button onclick="window.location.href='/mathswizard/dashboard/mystudents/delete/{{ profile.id }}'">Delete Student</button></td></tr>
+	</tbody>
+</table>
+<div id="chart" align="center">
+<canvas id="myChart" width="600" height="400"></canvas>
+</div>
+<script>
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["Completed", "Focus Completion", "Skipped"],
+        datasets: [{
+            data: [{{ profile.completed }} , {{ profile.cof }}, {{ profile.skipped }}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+		maintainAspectRatio: false,
+		responsive: false,
+		title: {
+            display: true,
+            text: 'Focus distribution'
+        }
+    }
+});
+</script>
+{% endblock %}

@@ -18,19 +18,34 @@ class TeacherProfile(models.Model):
 
 class StudentProfile(models.Model):
 	user = models.OneToOneField(User)
-	teacher = models.ForeignKey(settings.AUTH_USER_MODEL, default=1, related_name='Test')
+	teacher = models.ForeignKey(User, related_name = 'Test', default= 1)
+	first_name = models.CharField(max_length = 100, default= '', blank=True)
+	last_name = models.CharField(max_length = 100, default= '', blank=True)
 	FOCUS_CHOICES = (
 		('Addition', 'Addition'),
 		('Multiplication', 'Multiplication'),
 		('Subtraction', 'Subtraction')
 	)
+	LIKES_CHOICES = (
+		('Addition', 'Addition'),
+		('Multiplication', 'Multiplication'),
+		('Subtraction', 'Subtraction'),
+		('N/A', 'N/A')
+	)
 	DIFFICULTY_CHOICES = (
 		('Beginner', 'Beginner'),
 		('Intermediate', 'Intermediate'),
-		('Advanced', 'Advanced')
+		('Advanced', 'Advanced'),
 	)
 	focus = models.CharField(max_length = 100, choices = FOCUS_CHOICES, default = 'Addition')
 	difficulty = models.CharField(max_length = 100, choices = DIFFICULTY_CHOICES, default = 'Beginner')
+	likes = models.CharField(max_length = 100, choices = LIKES_CHOICES, default = 'N/A')
+	dislikes = models.CharField(max_length = 100, choices = LIKES_CHOICES, default = 'N/A')
+	level = models.IntegerField(default = '1')
+	completed = models.IntegerField(default = '0')
+	cof = models.IntegerField(default = '0')
+	skipped = models.IntegerField(default = '0')
+	levelprog = models.IntegerField(default = '0')
 	
 	def __str__(self):
 		return self.user.username

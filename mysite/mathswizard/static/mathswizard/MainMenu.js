@@ -1,23 +1,23 @@
 Game.MainMenu = function(game){
-
 };
 
 var titlescreen;
 
 Game.MainMenu.prototype = {
 	create:function(game){
-
 		titlescreen = game.add.sprite(game.world.centerX, game.world.centerY, 'titlescreen');
+		titlescreen.height = game.height;
+		titlescreen.width = game.width;
 		titlescreen.anchor.setTo(0.5, 0.5);
 		
 		this.createButton(game, "Play", game.world.centerX, game.world.centerY + 32, 300, 100,
 			function(){
-				this.state.start('Level1');
+				this.state.start('preLevel');
 			});
 			
 		this.createButton(game, "About", game.world.centerX, game.world.centerY + 192, 300, 100,
 			function(){
-				console.log('About');
+				this.state.start('howto');
 			});
 
 		

@@ -26,6 +26,11 @@ urlpatterns = [
 	url(r'^add_student/$', views.add_student),
 	url(r'^students/$', views.students),
 	url(r'^game/$', views.game),
-	url(r'^student/$', views.student),
-	url(r'^student_focus/$', views.student_focus)
+	url(r'^student/$', views.student, name='student'),
+	url(r'^student_focus/(?P<student_no>[0-9]+)/$', views.student_focus),
+	url(r'^first_focus/$', views.first_focus),
+	url(r'^Usercheck/$', views.Usercheck),
+	url(r'^dashboard/mystudents/(?P<student_no>[0-9]+)/$', views.StudentDetails),
+	url(r'^myProfile/$', views.myProfile, name='Profile'),
+	url(r'^dashboard/mystudents/delete/(?P<student_no>[0-9]+)/$', views.delete_student),
 ]

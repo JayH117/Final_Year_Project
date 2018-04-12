@@ -9,19 +9,22 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
 </head>
+
 <img src="{% static 'mathswizard/wizard.png' %}" style="width:200px;height:125px;">
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/mathswizard/home">Maths Wizard</a>
+      <a class="navbar-brand" href="/mathswizard/dashboard/">Maths Wizard</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="/mathswizard/login" style="border-radius:5px 5px 0px 0px;">Log in</a></li>
-      <li><a href="/mathswizard/register" style="border-radius:0px 5px 5px 0px">Sign up</a></li>
+      <li><a href="/mathswizard/dashboard/" style="border-radius:5px 5px 0px 0px;">Dashboard</a></li>
+      <li><a href="/mathswizard/add_student/" style="border-radius:0px 5px 5px 0px">Add Student</a></li>
+	  <li><a href="/mathswizard/students/" style="border-radius:0px 5px 5px 0px">My Class</a></li>
+	  <li><a href="/mathswizard/dashboard/edit_user" style="border-radius:0px 5px 5px 0px">Edit Profile</a></li>
+	  <li><a href="/mathswizard/logout/" style="border-radius:0px 5px 5px 0px">Logout</a></li>
     </ul>
   </div>
 </nav>
-
 
 <body class='container'>
 	<div>
@@ -29,5 +32,5 @@
 		{% endblock %}
 	</div>
 </body>
-
+</div>
 </html>

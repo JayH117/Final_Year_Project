@@ -1,4 +1,4 @@
-{% extends "mathswizard/header.html" %}
+{% extends "mathswizard/Studentheader.html" %}
 
 {% block content %}
 <body>
@@ -7,10 +7,9 @@
 
 	<div id = "incon">
 	
-		<h2>Welcome {{user.first_name}}!</h2>
+		<h2>Hi, {{user.first_name}}!</h2>
 			<button onclick="window.location.href='/mathswizard/game'">Start Game</button>
 			<a href="/mathswizard/logout">Log Out</a>
-			<a href="/admin/mathswizard/studentprofile/">Edit Students</a>#
 			<h1>{{ data }}</h1>
 	</div>
 </div>
