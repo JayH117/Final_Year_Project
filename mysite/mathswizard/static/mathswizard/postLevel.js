@@ -1,3 +1,4 @@
+// James Hynes 2018
 Game.postLevel = function(game){
 
 };
@@ -8,6 +9,7 @@ console.log("name is " + name);
 Game.postLevel.prototype = {
 	create:function(game){
 		
+		// determining the liked and disliked operator
 		if((additionCounter > multiplicationCounter) && (additionCounter > subtractionCounter)){
 			likes = "Addition";
 		}
@@ -30,10 +32,7 @@ Game.postLevel.prototype = {
 			dislikes = "N/A";
 		}
 		
-		console.log("ac="+additionCounter);
-		console.log("mc="+multiplicationCounter);
-		console.log("sc="+subtractionCounter);
-		console.log(type);
+		// declaring variables
 		var textbox = 0;
 		titlescreen = game.add.sprite(game.world.centerX, game.world.centerY, 'gamescreen');
 		titlescreen.anchor.setTo(0.5, 0.5);
@@ -44,11 +43,9 @@ Game.postLevel.prototype = {
 		bar.beginFill(0x000000, 0.6);
 		bar.drawRect(0, 450, 1000, 100);
 		
+		// quit button
 		this.createButton(game, "Quit", game.world.centerX+450, game.world.centerY-250, 50, 40,
 			function(){
-				console.log('Quit');
-				console.log(likes);
-				console.log(dislikes);
 				document.getElementById('id_likes').value = likes;
 				document.getElementById('id_dislikes').value = dislikes;
 				document.getElementById('id_level').value = level;
@@ -59,31 +56,35 @@ Game.postLevel.prototype = {
 				document.getElementById("gameForm").submit();
 			});
 		
+		// next button for updating text
 		this.createButton(game, "Next", game.world.centerX+425, game.world.centerY + 200, 75, 75,
 			function(){
 				textbox++;
 				this.updateText(textbox, game);
 			});
-	var style = { font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
-	if (levelprog == 0 )
-	{
-		text = game.add.text(0, 0, "Well done! That should keep that pesky dragon at bay!", style);
-		text.setShadow(3, 3, 'rgba(0,0,0,0.5)', 2);
-		text.setTextBounds(50, 100, 800, 800);
-	}
-	else{
-		text = game.add.text(0, 0, "Awesome! A few more and that dragon will be done for!", style);
-		text.setShadow(3, 3, 'rgba(0,0,0,0.5)', 2);
-		text.setTextBounds(50, 100, 800, 800);
-	}
-    
+			
+		var style = { font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
+		
+		// determining if the level has changed and updating text appropriately
+		if (levelprog == 0 )
+		{
+			text = game.add.text(0, 0, "Well done! That should keep that pesky dragon at bay!", style);
+			text.setShadow(3, 3, 'rgba(0,0,0,0.5)', 2);
+			text.setTextBounds(50, 100, 800, 800);
+		}
+		else{
+			text = game.add.text(0, 0, "Awesome! A few more and that dragon will be done for!", style);
+			text.setShadow(3, 3, 'rgba(0,0,0,0.5)', 2);
+			text.setTextBounds(50, 100, 800, 800);
+		}
 	
-	window.graphics = graphics;
+		window.graphics = graphics;
 	},
 
 	update:function(game){
 	},
-
+	
+	// create button
 	createButton:function (game, string, x, y, w, h, callback) {
 		var button1 = game.add.button(x, y, 'button', callback, this, 2, 1, 0);
 
@@ -99,6 +100,7 @@ Game.postLevel.prototype = {
 		txt.anchor.setTo(0.5, 0.5);
 	},
 	
+	// updating text for sum creation and button creation
 	updateText:function(textbox, game){
 		
 		if (textbox == 1){

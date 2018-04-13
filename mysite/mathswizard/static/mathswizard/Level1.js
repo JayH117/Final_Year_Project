@@ -1,11 +1,12 @@
+// James Hynes 2018
 Game.Level1 = function(game){
 
 };
 
 Game.Level1.prototype = {
 	create:function(game){
-		console.log(type);
-		console.log("game state start");
+		
+		// declaring variables
 		var numNo = 6;
 		var numberChosen = 0;
 		var sum = [];
@@ -23,8 +24,12 @@ Game.Level1.prototype = {
 		var secondChoice;
 		var numbers = [];
 		
+		// checking sum chosen
 		if(type == "Addition"){
+			// sets operator
 			opText = "+";
+			
+			//checking difficulty and generating choices and answer factors accordingly
 			if (difficulty == "Beginner"){
 				for (var i = 0; i < (numNo-2); i++)
 				{		
@@ -56,6 +61,7 @@ Game.Level1.prototype = {
 			}
 		}
 		
+		// same code as above for subtraction
 		if(type == "Subtraction"){
 			opText = "-";
 			if (difficulty == "Beginner"){
@@ -89,6 +95,7 @@ Game.Level1.prototype = {
 			}
 		}
 		
+		// same code as above for multiplication
 		if(type == "Multiplication"){
 			opText = "x";
 			if (difficulty == "Beginner"){
@@ -122,14 +129,16 @@ Game.Level1.prototype = {
 			}
 		}
 		
-		console.log(type);
+		// generating answer for addition
 		if(type == "Addition")
 		{
 			answer = part1+part2;
 		}
 		
+		// generating answer for subtraction
 		if(type == "Subtraction")
 		{
+			// checking to make sure no negative numbers are chosen
 			if(part1>part2){
 				answer = part1-part2;
 			}
@@ -139,6 +148,7 @@ Game.Level1.prototype = {
 			
 		}
 		
+		// generating answer for multiplication
 		if(type == "Multiplication")
 		{
 			answer = part1*part2;
@@ -146,11 +156,15 @@ Game.Level1.prototype = {
 		
 		
 		numbers.push(part1, part2);
-
-		console.log("part1:",part1,"part2:", part2);
+		
+		//randomising the numbers array so no pattern emerges
 		numbers = this.randomise(numbers);
+		
+		// adding game screen to the state
 		titlescreen = game.add.sprite(game.world.centerX, game.world.centerY, 'desk');
 		titlescreen.anchor.setTo(0.5, 0.5);
+		
+		// declaring position variables 
 		var posx = game.world.centerX - 192;
 		var posy = game.world.centerY + 50;
 		var opPosX = game.world.centerX + 350;
@@ -159,16 +173,20 @@ Game.Level1.prototype = {
 		var choicesY = game.world.centerY - 200;
 		var secondChoicex = game.world.centerX;
 
+		// starting button creation loop
 		for (var i = 0; i < numbers.length; i++)
-		{
+		{	
+			// for the first three buttons
 			if (i < 2){
-
 				if (countNums == 0){
 					this.createButton(game, numbers[i], posx, posy, 150, 100,
 					function(){ 
-						if(selected <2){
+						// if both numbers are not selected
+						if(selected < 2){
+							// adding this button value to the sum array
 							sum.push(numbers[0]);
-							console.log(sum);
+							
+							// determine if the button is first or second choice and position
 							if (selected == 0){
 								firstChoice = this.popUp(numbers[0], game, selected);
 								fct = this.popText(numbers[0], game, selected);
@@ -201,9 +219,7 @@ Game.Level1.prototype = {
 						}
 					});
 				}
-
 				posx = posx + 200;
-				console.log(numbers[i]);
 
 			}
 			if (i == 2){
@@ -294,14 +310,18 @@ Game.Level1.prototype = {
 			}
 			countNums++;
 		};
-
+		
+		// displaying the answer
 		this.createButton(game, answer, game.world.centerX+300, game.world.centerY-200, 150, 100,
 			function(){
-				console.log('answer');
 			});
+		
+		// displaying the operator
 		this.createButton(game, "=", game.world.centerX+150, game.world.centerY-200, 75, 50,
 			function(){
 			});
+		
+		// quit button, saves all game data and posts the form the data is saved to
 		this.createButton(game, "Quit", game.world.centerX+450, game.world.centerY-250, 50, 40,
 			function(){
 				console.log('Quit');
@@ -316,7 +336,8 @@ Game.Level1.prototype = {
 				document.getElementById('id_levelprog').value = levelprog;
 				document.getElementById("gameForm").submit();
 			});
-			
+		
+		// skip button starts the skip state
 		this.createButton(game, "Skip", game.world.centerX-400, game.world.centerY+200, 150, 100,
 			function(){
 				console.log('Skip');
@@ -332,7 +353,8 @@ Game.Level1.prototype = {
 				}
 				game.state.start('skipHandler');
 			});
-
+		
+		// remove button to remove selection 
 		this.createButton(game, "Remove", game.world.centerX+400, game.world.centerY + 100, 150, 75,
 			function(){
 				selected = 0;
@@ -343,6 +365,8 @@ Game.Level1.prototype = {
 				this.clear(sum);
 			});
 
+		// check button checks the answer, clears if incorrect, increments appropriate values otherwise 
+		// and starts postLevel state
 		this.createButton(game, "Check", game.world.centerX+400, game.world.centerY + 200, 125, 75,
 			function(){
 				
@@ -357,9 +381,11 @@ Game.Level1.prototype = {
 				if (type == "Subtraction"){
 					check = sum[0] - sum[1];
 				}
+				
+				// make sure selected = 2
 				if(selected == 2){
-					console.log(check);
-					console.log(answer);
+					
+					// increment counters if answer is right
 					if (check == answer){
 						if(type == "Addition"){
 							additionCounter++;
@@ -372,20 +398,20 @@ Game.Level1.prototype = {
 						}
 						completed++;
 						levelprog++;
-						console.log("LEVELPROG"+levelprog);
+						
+						// add extra point if the sum focussed on was completed
 						if (type == Sfocus)
 						{
-							console.log("here")
 							cof++;
 							levelprog++;
 						}
+						// increment level if level over 10 and set levelProg to zero
 						if (levelprog >= 10)
 						{
 							levelprog = 0;
 							level++;
-							console.log(level);
 						}
-						console.log(completed);
+						// start postlevel
 						this.state.start('postLevel');
 					}
 					else{
@@ -397,6 +423,7 @@ Game.Level1.prototype = {
 						sct.kill();
 					}
 				}
+				// if 2 values not selected, clear
 				else{
 					this.clear(sum);
 					selected = 0;
@@ -415,6 +442,7 @@ Game.Level1.prototype = {
 		
 	},
 	
+	// function to create button to display sum
 	popUp:function(num, game, selected){
 		if(selected == 0){
 			firstChoice = game.add.button(game.world.centerX - 350, game.world.centerY-200, 'button', function(){}, this, 2, 1, 0);
@@ -422,6 +450,7 @@ Game.Level1.prototype = {
 			firstChoice.width = 150;
 			firstChoice.height = 100;
 			
+			// add the operator to the sum
 			operator = game.add.button(game.world.centerX - 175, game.world.centerY-200, 'button', function(){}, this, 2, 1, 0);
 			operator.anchor.setTo(0.5, 0.5);
 			operator.width = 75;
@@ -439,6 +468,7 @@ Game.Level1.prototype = {
 		}
 	},
 
+	// create button function as seen before
 	createButton:function (game, string, x, y, w, h, callback) {
 		var button1 = game.add.button(x, y, 'button', callback, this, 2, 1, 0);
 
@@ -453,7 +483,8 @@ Game.Level1.prototype = {
 		});
 		txt.anchor.setTo(0.5, 0.5);
 	},
-
+	
+	// randomise function to mix up the numbers array to prevent a pattern
 	randomise:function(array) {
 	var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -470,6 +501,7 @@ Game.Level1.prototype = {
 	  return array;
 	},
 	
+	// function that works with popUp to place text on display sum buttons
 	popText:function(num, game, selected){
 		if(selected == 0){
 			fct = game.add.text(game.world.centerX - 350, game.world.centerY - 200, num, {
@@ -499,6 +531,7 @@ Game.Level1.prototype = {
 		}
 	},
 	
+	// clear function that clears selected array
 	clear:function(sum){
 		while(sum.length > 0) {
 			sum.pop();

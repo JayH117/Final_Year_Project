@@ -1,9 +1,11 @@
+// James Hynes 2018
 var Game = {};
 
 Game.Boot = function(game){
 
 };
 
+// booting the game
 Game.Boot.prototype = {
 	init:function(){
 
@@ -19,7 +21,7 @@ Game.Boot.prototype = {
 	},
 
 	create:function(){
-
+		// starting preloader
 		this.state.start('Preloader')
 	}
 };

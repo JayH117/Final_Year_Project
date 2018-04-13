@@ -1,13 +1,14 @@
+// James Hynes 2018
 Game.skipHandler = function(game){
 
 };
 
-var titlescreen;
-console.log("name is " + name);
+
 
 Game.skipHandler.prototype = {
 	create:function(game){
-		
+		var titlescreen;
+		// determining the liked and disliked sums 
 		if((additionCounter > multiplicationCounter) && (additionCounter > subtractionCounter)){
 			likes = "Addition";
 		}
@@ -30,6 +31,7 @@ Game.skipHandler.prototype = {
 			dislikes = "N/A";
 		}
 		
+		// declaring variables
 		var textbox = 0;
 		titlescreen = game.add.sprite(game.world.centerX, game.world.centerY, 'gamescreen');
 		titlescreen.anchor.setTo(0.5, 0.5);
@@ -40,6 +42,7 @@ Game.skipHandler.prototype = {
 		bar.beginFill(0x000000, 0.6);
 		bar.drawRect(0, 450, 1000, 100);
 		
+		// determining the operation for putting into the post game text
 		if(type == "Addition"){
 			operator = " plus ";
 		}
@@ -50,11 +53,9 @@ Game.skipHandler.prototype = {
 			operator = " multiplied by ";
 		}
 		
+		// quit button
 		this.createButton(game, "Quit", game.world.centerX+450, game.world.centerY-250, 50, 40,
 			function(){
-				console.log('Quit');
-				console.log(likes);
-				console.log(dislikes);
 				document.getElementById('id_likes').value = likes;
 				document.getElementById('id_dislikes').value = dislikes;
 				document.getElementById('id_level').value = level;
@@ -65,6 +66,7 @@ Game.skipHandler.prototype = {
 				document.getElementById("gameForm").submit();
 			});
 		
+		// next button that updates text
 		this.createButton(game, "Next", game.world.centerX+425, game.world.centerY + 200, 75, 75,
 			function(){
 				textbox++;
@@ -72,6 +74,7 @@ Game.skipHandler.prototype = {
 			});
 	var style = { font: "bold 32px Arial", fill: "#fff", boundsAlignH: "center", boundsAlignV: "middle" };
 	
+	// printing the answer from previous state, error checking for subtraction
 	if(type == "Subtraction" && (part1 < part2)){
 		text = game.add.text(0, 0, "That was a tough one\n the answer was "+ part2 + operator + part1 + " equals " + answer, style);
 	}
@@ -79,6 +82,7 @@ Game.skipHandler.prototype = {
 		text = game.add.text(0, 0, "That was a tough one\n the answer was "+ part1 + operator + part2 + " equals " + answer, style);
 	}
 	
+	// shadow around text
     text.setShadow(3, 3, 'rgba(0,0,0,0.5)', 2);
     text.setTextBounds(50, 100, 800, 800);
 	
@@ -87,7 +91,8 @@ Game.skipHandler.prototype = {
 
 	update:function(game){
 	},
-
+	
+	// create button
 	createButton:function (game, string, x, y, w, h, callback) {
 		var button1 = game.add.button(x, y, 'button', callback, this, 2, 1, 0);
 
@@ -103,6 +108,7 @@ Game.skipHandler.prototype = {
 		txt.anchor.setTo(0.5, 0.5);
 	},
 	
+	// update text restarting of the level1 state
 	updateText:function(textbox, game){
 		
 		if (textbox == 1){

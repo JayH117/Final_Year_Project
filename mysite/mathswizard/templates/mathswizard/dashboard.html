@@ -21,10 +21,11 @@
 			<h3> You have {{ countStudents }} students with an average level of {{ levelAvg }} <h3>
 			<canvas id="myChart" width="250" height="250"></canvas>
 		</div>
-	</div>
-		{{ % else % }}
-			<h3> You have not added any students yet <h3>
+		{% else %}
+			<h3> You have not added any students yet, to add a student click  <a href ="/mathswizard/add_student/">here</a> <h3>
 		{% endif %}
+	</div>
+		
 <script>
 var ctx = document.getElementById("myChart").getContext('2d');
 var myChart = new Chart(ctx, {
