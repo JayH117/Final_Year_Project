@@ -105,6 +105,6 @@ Game.howto.prototype = {
 		if (textbox == 6){
 			text.setText("So help us beat the dragons and save the kingdom!");	
 		}
-		return textbox
-	};
+		return textbox;
+	}
 };
